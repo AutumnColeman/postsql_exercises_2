@@ -45,15 +45,21 @@ select * from review, reviewer where review.author_reviewer_id  = reviewer.id;
 
 -- list each review along with the restaurant they were written for. Select just the restaurant name and the review text
 
-select review, restaurant.name where restaurant_id = restaurant.id;
+select
+	restaurant.name as "Restaurant",
+	review.review as "Review"
+from
+	restaurant, review
+where
+	restaurant.id = review.restaurant_id; restaurant_id;
 
-select review, restaurant.name from review right outer join restaurant on restaurant_id = restaurant.id order by restaurant.name;
-
-select restaurant.name, review from restaurant left outer join review on restaurant.id = restaurant_id;
 -- get the average stars by restaurant. (restaurant name, average star rating)
-select avg(stars), restaurant.name from review right outer join restaurant on restaurant_id = restaurant.id group by restaurant.name;
 
-select avg(stars), restaurant.name where restaurant.id = restaurant_id;
+select
+avg(stars) as "Average Stars",
+restaurant.name as "Restaurant Name"
+where
+restaurant.id = restaurant_id;
 
 -- get the number of reviews written for each restaurant. Select the restaurant name and the review count.
 select
@@ -109,7 +115,6 @@ group by
 	category;
 
 -- get number of 5 star reviews by restaurant (restaurant name, 5-star count)
--- get number of 5 star reviews by restaurant (restaurant name, 5-star count)
 select
 	restaurant.name as "Restaurant",
 	count(review.*) as "5 Star Reviews"
@@ -121,3 +126,14 @@ where
 	review.stars = 5
 group by
 restaurant.name;
+
+-- average star rating for a food category (category name, average star rating)
+select
+	restaurant.category as "Category",
+	avg(review.stars) as "Average Star Rating"
+from
+	restaurant, review
+where
+	restaurant.id = review.restaurant_id
+group by
+restaurant.category;
