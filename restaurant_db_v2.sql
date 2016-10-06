@@ -35,6 +35,26 @@ insert into restaurant values
 insert into restaurant values
 (default, 'Chipotle', '3424 Piedmont Rd NE, Atlanta, GA 30305', 'Tex-Mex');
 
+-- reviewers
+INSERT INTO "reviewer"("id","name","email","karma")
+VALUES
+(default, 'Peter Pan ', 'peter@neverland.com', 6),
+(default, 'Wendy Darling ', 'wendy@london.com', 7),
+(default, 'Capitan Hook', 'hook@pirate.com', 0);
+
+-- reviews
+INSERT INTO "review"("id","reviewer_id","stars","title","review","restaurant_id")
+VALUES
+(default, 1, 5, 'FOOD!', 'I like food!', 3),
+(default, 2, 4, 'Delicious', 'Try the dumplings.', 3),
+(default, 3, 0, 'Disappointment', 'No actual pearls.', 3),
+(default, 3, 5, 'Excellent!', 'The tattooed staff reminded me of my ship\'s crew.', 1),
+(default, 1, 1, '21+', 'Not allowed in.', 1),
+(default, 2, 3, 'Interesting...', 'Smelled good, but looked scary.', 1),
+(default, 1, 5, '24 hours', 'I went at 3 am and got pho!',2),
+(default, 2, 4, 'Tasty', 'The bahn mi was tasty and cheap.', 2),
+(default, 3, 3, 'Not bad', 'The pho was acceptable.', 2);
+
 
 -- list the reviews for a given restaurant (filter by its name or id)
 select * from review where restaurant_id = 1;
